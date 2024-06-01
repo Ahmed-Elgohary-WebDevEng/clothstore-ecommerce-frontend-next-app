@@ -1,10 +1,19 @@
-import Image from "next/image";
+import HomeSlider from "@/components/home/home-slider";
+import FeaturedProductList from "@/components/home/featured-product/featured-product-list";
+import CategoryList from "@/components/home/category-list/category-list";
+import NewProductList from "@/components/home/new-product/new-product-list";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h3 className="text-xl text-red-500 font-bold">Hello World</h3>
-      <p></p>
+    <main>
+      {/* Home Slider */}
+      <HomeSlider />
+      {/* Featured Products */}
+      <FeaturedProductList />
+      {/*  Categories  */}
+      <CategoryList />
+      {/* New Products */}
+      <NewProductList />
     </main>
   );
 }
