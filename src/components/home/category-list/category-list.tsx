@@ -1,5 +1,5 @@
 import React from "react";
-import CategoryCardItem from "@/components/home/category-list/category-card-item";
+import CategoryCardItem from "@/components/shared/category-card-item";
 
 const CategoryList = ({}) => {
   /**

@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCardItem from "@/components/home/featured-product/product-card-item";
+import ProductCardItem from "@/components/shared/product-card-item";
 
 const NewProductList = ({}) => {
   /**
