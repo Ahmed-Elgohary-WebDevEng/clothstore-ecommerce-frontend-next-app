@@ -1,8 +1,10 @@
 # E-Commerce Clothing Store
 
-![Store Logo](public/next.svg)
+![Store Logo](public/logo.png)
 
-Welcome to our E-Commerce Clothing Store, your go-to destination for the latest fashion trends and popular brands. This repository contains the source code for a fully-functional ecommerce web application designed to provide a seamless shopping experience for users.
+Welcome to our E-Commerce Clothing Store, your go-to destination for the latest fashion trends and popular brands. This
+repository contains the source code for a fully-functional ecommerce web application designed to provide a seamless
+shopping experience for users.
 
 ## Features
 
@@ -37,7 +39,6 @@ Welcome to our E-Commerce Clothing Store, your go-to destination for the latest 
     - Git for version control
     - Docker for containerization
     - Jest for testing
-
 
 ## Installation
 
