@@ -1,6 +1,6 @@
 import React from "react";
-import ProductImages from "@/components/list-page-components/product-images";
-import ProductDetails from "@/components/list-page-components/product-details";
+import ProductImages from "@/components/product-details/product-images";
+import ProductDetails from "@/components/product-details/product-details";
 
 const SlugPage = ({}) => {
   /**
