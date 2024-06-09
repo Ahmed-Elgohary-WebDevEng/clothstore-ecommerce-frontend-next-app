@@ -4,17 +4,15 @@ import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const Add = ({}) => {
+const Add = ({ productQty }: { productQty: number }) => {
   const [quantity, setQuantity] = useState(1);
-
-  const tempStock = 4;
 
   function handleQuantity(type: "i" | "d") {
     if (type === "d" && quantity > 1) {
       setQuantity((prevState) => prevState - 1);
     }
 
-    if (type === "i" && quantity < tempStock) {
+    if (type === "i" && quantity < productQty) {
       setQuantity((prevState) => prevState + 1);
     }
   }
@@ -44,20 +42,22 @@ const Add = ({}) => {
             <span className="mx-4">{quantity}</span>
             <button
               className={`${
-                quantity >= tempStock
+                quantity >= productQty
                   ? "cursor-not-allowed text-gray-400"
                   : "cursor-pointer"
               }`}
-              disabled={quantity >= tempStock}
+              disabled={quantity >= productQty}
               onClick={() => handleQuantity("i")}
             >
               <Plus width={12} height={12} />
             </button>
           </div>
-          <p className="text-xs">
-            Only <span className="text-orange-500">4 items</span> left! <br />
-            Don&apos;t miss it
-          </p>
+          {productQty < 5 && (
+            <p className="text-xs">
+              Only <span className="text-orange-500">4 items</span> left! <br />
+              Don&apos;t miss it
+            </p>
+          )}
         </div>
         <Button
           variant={"outline"}
