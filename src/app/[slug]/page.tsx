@@ -3,6 +3,7 @@ import ProductImages from "@/components/product-details/product-images";
 import ProductDetails from "@/components/product-details/product-details";
 import { fetchProductBySlug } from "@/lib/actions/products-action";
 import { notFound } from "next/navigation";
+import { ProductProps } from "@/types";
 
 const SlugPage = async ({ params }: { params: { slug: string } }) => {
   const fetchedProduct = await fetchProductBySlug(params.slug);
@@ -11,11 +12,11 @@ const SlugPage = async ({ params }: { params: { slug: string } }) => {
     return <div>Error: {fetchedProduct}</div>;
   }
 
-  if (!fetchedProduct || !fetchedProduct.data) {
+  if (!fetchedProduct) {
     return notFound();
   }
 
-  const product = fetchedProduct.data;
+  const product: ProductProps = fetchedProduct.data;
   /**
    * -------------------
    * ------- JSX -------

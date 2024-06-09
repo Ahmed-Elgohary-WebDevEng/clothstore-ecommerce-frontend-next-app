@@ -1,7 +1,7 @@
 "use server";
 
 import axios from "@/lib/axios";
-import { ProductBySlugProps } from "@/types";
+import { ProductBySlugAPIResponse } from "@/types/api-responses";
 
 export async function fetchProducts() {
   const response = await axios.get("/v1/api/");
@@ -17,12 +17,12 @@ export async function fetchProducts() {
 
 export async function fetchProductBySlug(
   slug: string,
-): Promise<ProductBySlugProps | string> {
+): Promise<ProductBySlugAPIResponse | string> {
   try {
     const response = await axios.get(`/v1/api/products/${slug}`);
 
     if (response.status === 200) {
-      const data: ProductBySlugProps = response.data;
+      const data: ProductBySlugAPIResponse = response.data;
       return data;
     } else {
       return response.data.message;
