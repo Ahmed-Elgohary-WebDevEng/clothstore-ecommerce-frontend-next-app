@@ -22,8 +22,7 @@ export async function fetchProductBySlug(
     const response = await axios.get(`/v1/api/products/${slug}`);
 
     if (response.status === 200) {
-      const data: ProductBySlugAPIResponse = response.data;
-      return data;
+      return response.data;
     } else {
       return response.data.message;
     }

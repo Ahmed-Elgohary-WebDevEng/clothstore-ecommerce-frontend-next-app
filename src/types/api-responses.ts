@@ -1,5 +1,6 @@
-import { ProductProps } from "@/types/index";
+import { ProductProps, ProductVariantProps } from "@/types/index";
 
 export interface ProductBySlugAPIResponse {
-  data: ProductProps;
+  product: ProductProps;
+  product_variants: ProductVariantProps[];
 }

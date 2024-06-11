@@ -1,7 +1,7 @@
 import React from "react";
 import ProductImages from "@/components/product-details/product-images";
 import ProductDetails from "@/components/product-details/product-details";
-import { fetchProductBySlug } from "@/lib/actions/products-action";
+import { fetchProductBySlug } from "@/lib/actions/product-actions";
 import { notFound } from "next/navigation";
 import { ProductProps } from "@/types";
 
@@ -9,14 +9,14 @@ const SlugPage = async ({ params }: { params: { slug: string } }) => {
   const fetchedProduct = await fetchProductBySlug(params.slug);
 
   if (typeof fetchedProduct === "string") {
-    return <div>Error: {fetchedProduct}</div>;
+    return notFound();
   }
 
   if (!fetchedProduct) {
     return notFound();
   }
 
-  const product: ProductProps = fetchedProduct.data;
+  const product: ProductProps = fetchedProduct.product;
   /**
    * -------------------
    * ------- JSX -------

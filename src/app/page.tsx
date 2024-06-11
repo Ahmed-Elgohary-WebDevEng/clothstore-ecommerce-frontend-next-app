@@ -2,7 +2,7 @@ import HomeSlider from "@/components/home/home-slider";
 import FeaturedProductList from "@/components/home/featured-product/featured-product-list";
 import CategoryList from "@/components/home/category-list/category-list";
 import NewProductList from "@/components/home/new-product/new-product-list";
-import { fetchProducts } from "@/lib/actions/products-action";
+import { fetchProducts } from "@/lib/actions/product-actions";
 import { CategoryProps, ProductProps } from "@/types";
 
 interface DataProps {

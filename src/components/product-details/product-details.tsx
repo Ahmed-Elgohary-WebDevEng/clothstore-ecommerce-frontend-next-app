@@ -28,7 +28,7 @@ const ProductDetails = ({
       </div>
       <div className="h-[2px] bg-gray-100" />
       {/* Customization */}
-      <CustomizeProduct />
+      <CustomizeProduct attributes={productDetails.attributes} />
       <Add productQty={productDetails.quantity} />
       <div className="h-[2px] bg-gray-100" />
       {/* Description of the product */}
