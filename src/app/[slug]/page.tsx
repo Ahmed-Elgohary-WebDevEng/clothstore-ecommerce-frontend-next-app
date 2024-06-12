@@ -6,17 +6,14 @@ import { notFound } from "next/navigation";
 import { ProductProps } from "@/types";
 
 const SlugPage = async ({ params }: { params: { slug: string } }) => {
-  const fetchedProduct = await fetchProductBySlug(params.slug);
-
-  if (typeof fetchedProduct === "string") {
+  let product: ProductProps;
+  try {
+    const fetchedProduct = await fetchProductBySlug(params.slug);
+    product = fetchedProduct.product;
+  } catch (error: any) {
     return notFound();
   }
 
-  if (!fetchedProduct) {
-    return notFound();
-  }
-
-  const product: ProductProps = fetchedProduct.product;
   /**
    * -------------------
    * ------- JSX -------

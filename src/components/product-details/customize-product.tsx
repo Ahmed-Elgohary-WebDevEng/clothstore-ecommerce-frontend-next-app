@@ -4,7 +4,6 @@ import { AttributeProps } from "@/types";
 import AttributeItem from "@/components/product-details/attribute-item";
 
 const CustomizeProduct = ({ attributes }: { attributes: AttributeProps[] }) => {
-  console.log();
   /**
    * -------------------
    * ------- JSX -------

@@ -17,16 +17,8 @@ export async function fetchProducts() {
 
 export async function fetchProductBySlug(
   slug: string,
-): Promise<ProductBySlugAPIResponse | string> {
-  try {
-    const response = await axios.get(`/v1/api/products/${slug}`);
+): Promise<ProductBySlugAPIResponse> {
+  const response = await axios.get(`/v1/api/products/${slug}`);
 
-    if (response.status === 200) {
-      return response.data;
-    } else {
-      return response.data.message;
-    }
-  } catch (error: any) {
-    return error.message;
-  }
+  return response.data;
 }

@@ -1,11 +1,20 @@
+"use client";
 import React, { Fragment } from "react";
-import { AttributeProps } from "@/types";
+import { cn } from "@/lib/utils";
+
+interface Props {
+  attributeName: string;
+  attributeValues: string[];
+  selectedValue: string;
+  setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
+}
 
 const DefaultAttribute = ({
-  customAttribute,
-}: {
-  customAttribute: AttributeProps;
-}) => {
+  attributeName,
+  attributeValues,
+  selectedValue,
+  setSelectedValue,
+}: Props) => {
   /**
    * -------------------
    * ------- JSX -------
@@ -13,27 +22,22 @@ const DefaultAttribute = ({
    */
   return (
     <Fragment>
-      <h4 className="font-medium capitalize">
-        {customAttribute.attribute_name}
-      </h4>
+      <h4 className="font-medium capitalize">{attributeName}</h4>
       <ul className="flex items-center gap-3">
-        {customAttribute.values.map((value) => (
+        {attributeValues.map((value, index) => (
           <li
-            className="ring-1 ring-notification text-notification rounded-md py-1 px-4 text-sm cursor-pointer capitalize"
-            key={value.id}
+            key={index}
+            className={cn(
+              "ring-1 ring-notification rounded-md py-1 px-4 text-sm cursor-pointer capitalize",
+              selectedValue === value
+                ? "text-white bg-notification"
+                : "text-notification",
+            )}
+            onClick={() => setSelectedValue(value)}
           >
-            {value.attribute_value}
+            {value}
           </li>
         ))}
-
-        {/* selected */}
-        {/*<li className="ring-1 ring-notification text-white bg-notification rounded-md py-1 px-4 text-sm cursor-pointer">*/}
-        {/*  Medium*/}
-        {/*</li>*/}
-        {/* disabled */}
-        {/*<li className="ring-1 ring-pink-200 text-white bg-pink-200 rounded-md py-1 px-4 text-sm cursor-not-allowed">*/}
-        {/*  Large*/}
-        {/*</li>*/}
       </ul>
     </Fragment>
   );

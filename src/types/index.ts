@@ -31,7 +31,7 @@ export type CategoryProps = {
 export interface AttributeProps {
   id: number;
   attribute_name: string;
-  values: ValueProps[];
+  values: string[];
 }
 
 export interface ValueProps {
