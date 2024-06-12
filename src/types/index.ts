@@ -11,7 +11,7 @@ export type ProductProps = {
   product_note: string;
   published: number;
   images: ImageProp[];
-  attributes: AttributeProps[];
+  attributes?: AttributeProps[];
 };
 
 export interface ImageProp {
@@ -25,8 +25,14 @@ export type CategoryProps = {
   id: number;
   name: string;
   slug: string;
-  image_path: string;
+  image_path?: string;
 };
+
+export interface SubCategoryProps {
+  id: number;
+  name: string;
+  slug: string;
+}
 
 export interface AttributeProps {
   id: number;

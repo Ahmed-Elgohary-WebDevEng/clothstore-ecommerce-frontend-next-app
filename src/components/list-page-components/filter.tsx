@@ -7,8 +7,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import { CategoryProps, SubCategoryProps } from "@/types";
 
-const Filter = ({}) => {
+interface Props {
+  categories: CategoryProps[];
+  subCategories: SubCategoryProps[];
+}
+
+const Filter = ({ categories, subCategories }: Props) => {
   /**
    * -------------------
    * ------- JSX -------
@@ -19,11 +25,14 @@ const Filter = ({}) => {
       <div className="flex gap-6">
         <Select name="type">
           <SelectTrigger className="min-w-fit w-[120px]">
-            <SelectValue placeholder="Type" />
+            <SelectValue placeholder="Category" />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="physical">Physical</SelectItem>
-            <SelectItem value="digital">Digital</SelectItem>
+          <SelectContent className={"max-h-52 overflow-y-scroll"}>
+            {categories.map((category: CategoryProps) => (
+              <SelectItem key={category.id} value={category.name}>
+                {category.name}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
         <Input
@@ -41,11 +50,14 @@ const Filter = ({}) => {
         {/* TODO: Filter Categories */}
         <Select name="cat">
           <SelectTrigger className="min-w-fit w-[120px]">
-            <SelectValue placeholder="Category" />
+            <SelectValue placeholder="Sub Category" />
           </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="arrival">New Arrival</SelectItem>
-            <SelectItem value="popular">Popular</SelectItem>
+          <SelectContent className="max-h-52 overflow-y-scroll">
+            {subCategories.map((subCategory: SubCategoryProps) => (
+              <SelectItem key={subCategory.id} value={subCategory.slug}>
+                {subCategory.name}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
         <Select name="">

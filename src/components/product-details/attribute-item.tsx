@@ -6,7 +6,9 @@ import DefaultAttribute from "@/components/product-details/attributes/default-at
 
 const AttributeItem = ({ attribute }: { attribute: AttributeProps }) => {
   // state for selected Value
-  const [selectedValue, setSelectedValue] = useState<string>("");
+  const [selectedValue, setSelectedValue] = useState<string>(
+    attribute.values[0],
+  );
 
   return attribute.attribute_name === "color" ? (
     <ColorAttribute
