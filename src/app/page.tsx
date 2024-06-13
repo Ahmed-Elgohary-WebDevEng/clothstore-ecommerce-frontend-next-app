@@ -15,7 +15,7 @@ export default async function Home() {
   const result = await fetchHomePageData();
 
   if ("error" in result) {
-    throw new Error("Some thing went wrong when fetching data");
+    throw new Error("Failed to fetch home page data");
   }
 
   return (

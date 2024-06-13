@@ -5,22 +5,15 @@ import Image from "next/image";
 import Filter from "@/components/list-page-components/filter";
 import ProductList from "@/components/list-page-components/product-list";
 import { fetchFilteredProducts } from "@/lib/actions/product-actions";
-import { notFound } from "next/navigation";
 
 const ListPage = async ({}) => {
-  //   Fetch Filtered Products API
-  let categoryList, subCategories, filteredProducts;
-  try {
-    const { categories, sub_categories, filtered_products } =
-      await fetchFilteredProducts();
+  // fetch api data
+  const result = await fetchFilteredProducts();
 
-    categoryList = categories;
-    subCategories = sub_categories;
-    filteredProducts = filtered_products.data;
-  } catch (error) {
-    // Todo ==> handle errors when fetching api failed
-    return notFound();
+  if ("error" in result) {
+    throw new Error("Failed to fetch filtered products");
   }
+
   /**
    * -------------------
    * ------- JSX -------
@@ -49,10 +42,13 @@ const ListPage = async ({}) => {
         </div>
       </div>
       {/*  Filter  */}
-      <Filter categories={categoryList} subCategories={subCategories} />
+      <Filter
+        categories={result.categories}
+        subCategories={result.sub_categories}
+      />
       {/*  Products  */}
       <h1 className="mt-12 text-xl font-semibold">Products For You!</h1>
-      <ProductList filteredProducts={filteredProducts} />
+      <ProductList filteredProducts={result.filtered_products.data} />
     </section>
   );
 };

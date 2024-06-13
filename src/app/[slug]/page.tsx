@@ -5,13 +5,6 @@ import { fetchProductBySlug } from "@/lib/actions/product-actions";
 import { notFound } from "next/navigation";
 
 const SlugPage = async ({ params }: { params: { slug: string } }) => {
-  // let product: ProductProps;
-  // try {
-  //   const fetchedProduct = await fetchProductBySlug(params.slug);
-  //   product = fetchedProduct.product;
-  // } catch (error: any) {
-  //   return notFound();
-  // }
   const result = await fetchProductBySlug(params.slug);
 
   if ("error" in result) {

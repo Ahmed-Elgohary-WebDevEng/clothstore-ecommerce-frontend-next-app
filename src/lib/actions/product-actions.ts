@@ -37,10 +37,18 @@ export async function fetchProductBySlug(
   }
 }
 
-export async function fetchFilteredProducts(): Promise<FilteredProductsAPIResponse> {
-  const response = await axios.get(
-    `/v1/api/products?&search=12424&category=124`,
-  );
+export async function fetchFilteredProducts(): Promise<
+  FilteredProductsAPIResponse | ErrorResponse
+> {
+  try {
+    const response = await axios.get(
+      `/v1/api/products?&search=12424&category=124`,
+    );
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    return {
+      error: getErrorMessage(error),
+    };
+  }
 }
