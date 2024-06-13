@@ -2,23 +2,39 @@
 
 import axios from "@/lib/axios";
 import {
+  ErrorResponse,
   FilteredProductsAPIResponse,
   HomePageDataAPIResponse,
   ProductBySlugAPIResponse,
 } from "@/types/api-responses";
+import { getErrorMessage } from "@/lib/utils";
 
-export async function fetchHomePageData(): Promise<HomePageDataAPIResponse> {
-  const response = await axios.get("/v1/api/");
+export async function fetchHomePageData(): Promise<
+  HomePageDataAPIResponse | ErrorResponse
+> {
+  try {
+    const response = await axios.get("/v1/api/");
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    return {
+      error: getErrorMessage(error),
+    };
+  }
 }
 
 export async function fetchProductBySlug(
   slug: string,
-): Promise<ProductBySlugAPIResponse> {
-  const response = await axios.get(`/v1/api/products/${slug}`);
+): Promise<ProductBySlugAPIResponse | ErrorResponse> {
+  try {
+    const response = await axios.get(`/v1/api/products/${slug}`);
 
-  return response.data;
+    return response.data;
+  } catch (error) {
+    return {
+      error: getErrorMessage(error),
+    };
+  }
 }
 
 export async function fetchFilteredProducts(): Promise<FilteredProductsAPIResponse> {

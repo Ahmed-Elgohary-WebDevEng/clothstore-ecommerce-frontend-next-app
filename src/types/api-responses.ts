@@ -37,3 +37,7 @@ export interface PaginationProps {
   prev_page_url: any;
   next_page_url: string;
 }
+
+export type ErrorResponse = {
+  error: string;
+};
