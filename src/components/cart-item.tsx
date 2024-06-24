@@ -13,6 +13,7 @@ const CartItem = ({}) => {
         src={
           "https://images.pexels.com/photos/25047788/pexels-photo-25047788/free-photo-of-a-view-of-a-mountain-range-with-trees-and-clouds.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load"
         }
+        priority={false}
         alt={"cart icon"}
         width={72}
         height={96}

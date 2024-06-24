@@ -5,10 +5,12 @@ import Image from "next/image";
 import Filter from "@/components/list-page-components/filter";
 import ProductList from "@/components/list-page-components/product-list";
 import { fetchFilteredProducts } from "@/lib/actions/product-actions";
+import NoResults from "@/components/no-results";
 
-const ListPage = async ({}) => {
+const ListPage = async ({ searchParams }: { searchParams: any }) => {
+  console.log(searchParams);
   // fetch api data
-  const result = await fetchFilteredProducts();
+  const result = await fetchFilteredProducts(searchParams);
 
   if ("error" in result) {
     throw new Error("Failed to fetch filtered products");
@@ -38,7 +40,13 @@ const ListPage = async ({}) => {
           </Button>
         </div>
         <div className="relative w-1/3">
-          <Image src="/woman.png" alt="" fill className="object-contain" />
+          <Image
+            src="/woman.png"
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-contain"
+          />
         </div>
       </div>
       {/*  Filter  */}
@@ -48,7 +56,10 @@ const ListPage = async ({}) => {
       />
       {/*  Products  */}
       <h1 className="mt-12 text-xl font-semibold">Products For You!</h1>
-      <ProductList filteredProducts={result.filtered_products.data} />
+      <ProductList filteredProducts={result?.filtered_products.data} />
+      {result.filtered_products.data.length === 0 && (
+        <NoResults message={"products"} />
+      )}
     </section>
   );
 };

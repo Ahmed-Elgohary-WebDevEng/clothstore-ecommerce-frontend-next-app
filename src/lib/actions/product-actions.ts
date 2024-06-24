@@ -37,12 +37,22 @@ export async function fetchProductBySlug(
   }
 }
 
-export async function fetchFilteredProducts(): Promise<
-  FilteredProductsAPIResponse | ErrorResponse
-> {
+type SearchParamsProps = {
+  category: string | "";
+  min: number | "";
+  max: number | "";
+  sub_category: string | "";
+  sort: string | "";
+};
+
+export async function fetchFilteredProducts(
+  searchParams: SearchParamsProps,
+): Promise<FilteredProductsAPIResponse | ErrorResponse> {
   try {
     const response = await axios.get(
-      `/v1/api/products?&search=12424&category=124`,
+      // `/v1/api/products?category=${searchParams.category}&sub_category=${searchParams.sub_category}&min=${searchParams.min}&max=${searchParams.max}&sort=${searchParams.sort}`,
+      `/v1/api/products?category=${searchParams.category}&sub_category=${searchParams.sub_category}&min=${searchParams.min}&max=${searchParams.max}&sort=${searchParams.sort}`,
+      // `/v1/api/products?category=&sub_category=&min=&max=&sort=`,
     );
 
     return response.data;
