@@ -38,22 +38,34 @@ export async function fetchProductBySlug(
 }
 
 type SearchParamsProps = {
-  category: string | "";
-  min: number | "";
-  max: number | "";
-  sub_category: string | "";
-  sort: string | "";
+  category?: string;
+  min?: number;
+  max?: number;
+  sub_category?: string;
+  sort?: string;
 };
 
 export async function fetchFilteredProducts(
-  searchParams: SearchParamsProps,
+  filters: Partial<SearchParamsProps>,
 ): Promise<FilteredProductsAPIResponse | ErrorResponse> {
   try {
-    const response = await axios.get(
-      // `/v1/api/products?category=${searchParams.category}&sub_category=${searchParams.sub_category}&min=${searchParams.min}&max=${searchParams.max}&sort=${searchParams.sort}`,
-      `/v1/api/products?category=${searchParams.category}&sub_category=${searchParams.sub_category}&min=${searchParams.min}&max=${searchParams.max}&sort=${searchParams.sort}`,
-      // `/v1/api/products?category=&sub_category=&min=&max=&sort=`,
-    );
+    const {
+      category = "",
+      sub_category = "",
+      min = "",
+      max = "",
+      sort = "",
+    } = filters;
+
+    const queryParams = new URLSearchParams({
+      category: category.toString(),
+      sub_category: sub_category.toString(),
+      min: min.toString(),
+      max: max.toString(),
+      sort: sort.toString(),
+    }).toString();
+
+    const response = await axios.get(`/v1/api/products?${queryParams}`);
 
     return response.data;
   } catch (error) {

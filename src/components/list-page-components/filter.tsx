@@ -2,6 +2,7 @@
 import React from "react";
 import { CategoryProps, SubCategoryProps } from "@/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { unstable_noStore } from "next/cache";
 
 interface Props {
   categories: CategoryProps[];
@@ -9,6 +10,8 @@ interface Props {
 }
 
 const Filter = ({ categories, subCategories }: Props) => {
+  unstable_noStore();
+
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { replace } = useRouter();
@@ -20,6 +23,7 @@ const Filter = ({ categories, subCategories }: Props) => {
 
     const params = new URLSearchParams(searchParams);
     params.set(name, value);
+
     replace(`${pathname}?${params.toString()}`);
   }
 

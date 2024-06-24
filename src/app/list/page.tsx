@@ -8,7 +8,6 @@ import { fetchFilteredProducts } from "@/lib/actions/product-actions";
 import NoResults from "@/components/no-results";
 
 const ListPage = async ({ searchParams }: { searchParams: any }) => {
-  console.log(searchParams);
   // fetch api data
   const result = await fetchFilteredProducts(searchParams);
 
@@ -56,7 +55,7 @@ const ListPage = async ({ searchParams }: { searchParams: any }) => {
       />
       {/*  Products  */}
       <h1 className="mt-12 text-xl font-semibold">Products For You!</h1>
-      <ProductList filteredProducts={result?.filtered_products.data} />
+      <ProductList filteredProducts={result.filtered_products.data} />
       {result.filtered_products.data.length === 0 && (
         <NoResults message={"products"} />
       )}
