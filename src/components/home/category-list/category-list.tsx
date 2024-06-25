@@ -1,7 +1,8 @@
 import React from "react";
 import CategoryCardItem from "@/components/shared/category-card-item";
+import { CategoryProps } from "@/types";
 
-const CategoryList = ({}) => {
+const CategoryList = ({ categories }: { categories: CategoryProps[] }) => {
   /**
    * -------------------
    * ------- JSX -------
@@ -13,14 +14,9 @@ const CategoryList = ({}) => {
         Category List
       </h1>
       <div className="flex gap-4 md:gap-8 overflow-x-scroll hide-scrollbar">
-        <CategoryCardItem />
-        <CategoryCardItem />
-        <CategoryCardItem />
-        <CategoryCardItem />
-        <CategoryCardItem />
-        <CategoryCardItem />
-        <CategoryCardItem />
-        <CategoryCardItem />
+        {categories.map((category: CategoryProps) => (
+          <CategoryCardItem item={category} key={category.id} />
+        ))}
       </div>
     </section>
   );
