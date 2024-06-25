@@ -1,12 +1,15 @@
 import React from "react";
 import ProductCardItem from "@/components/shared/product-card-item";
 import { ProductProps } from "@/types";
+import Pagination from "@/components/pagination";
+import { PaginationProps } from "@/types/api-responses";
 
 interface Props {
   filteredProducts: ProductProps[];
+  paginationDetails: PaginationProps;
 }
 
-const ProductList = ({ filteredProducts }: Props) => {
+const ProductList = ({ filteredProducts, paginationDetails }: Props) => {
   /**
    * -------------------
    * ------- JSX -------
@@ -20,6 +23,12 @@ const ProductList = ({ filteredProducts }: Props) => {
           <ProductCardItem key={product.id} item={product} />
         ))}
       </div>
+      {/* Pagination */}
+      <Pagination
+        currentPage={paginationDetails.current_page}
+        hasPrev={!!paginationDetails.prev_page_url}
+        hasNext={!!paginationDetails.next_page_url}
+      />
     </section>
   );
 };

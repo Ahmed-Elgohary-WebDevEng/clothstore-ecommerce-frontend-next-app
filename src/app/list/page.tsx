@@ -55,7 +55,10 @@ const ListPage = async ({ searchParams }: { searchParams: any }) => {
       />
       {/*  Products  */}
       <h1 className="mt-12 text-xl font-semibold">Products For You!</h1>
-      <ProductList filteredProducts={result.filtered_products.data} />
+      <ProductList
+        filteredProducts={result.filtered_products.data}
+        paginationDetails={result.filtered_products.pagination}
+      />
       {result.filtered_products.data.length === 0 && (
         <NoResults message={"products"} />
       )}

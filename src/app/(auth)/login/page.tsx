@@ -1,12 +1,16 @@
 import React from "react";
 
-const LoginPage = ({}) => {
+const Page = ({}) => {
   /**
    * -------------------
    * ------- JSX -------
    * -------------------
    */
-  return <div>Login Page</div>;
+  return (
+    <div>
+      <h3>Login Page</h3>
+    </div>
+  );
 };
 
-export default LoginPage;
+export default Page;

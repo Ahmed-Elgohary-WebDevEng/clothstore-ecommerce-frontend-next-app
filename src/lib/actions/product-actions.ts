@@ -43,6 +43,7 @@ type SearchParamsProps = {
   max?: number;
   sub_category?: string;
   sort?: string;
+  page?: number;
 };
 
 export async function fetchFilteredProducts(
@@ -55,6 +56,7 @@ export async function fetchFilteredProducts(
       min = "",
       max = "",
       sort = "",
+      page = 1,
     } = filters;
 
     const queryParams = new URLSearchParams({
@@ -63,6 +65,7 @@ export async function fetchFilteredProducts(
       min: min.toString(),
       max: max.toString(),
       sort: sort.toString(),
+      page: page.toString(),
     }).toString();
 
     const response = await axios.get(`/v1/api/products?${queryParams}`);

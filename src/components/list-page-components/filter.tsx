@@ -23,6 +23,7 @@ const Filter = ({ categories, subCategories }: Props) => {
 
     const params = new URLSearchParams(searchParams);
     params.set(name, value);
+    params.set("page", "1");
 
     replace(`${pathname}?${params.toString()}`);
   }
