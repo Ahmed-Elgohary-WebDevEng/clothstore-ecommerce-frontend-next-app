@@ -21,7 +21,7 @@ const NavIcons = ({}) => {
   // router
   const router = useRouter();
 
-  const isLoggedIn = true;
+  const isLoggedIn = false;
 
   const handleClickOutside = (event: MouseEvent) => {
     if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
