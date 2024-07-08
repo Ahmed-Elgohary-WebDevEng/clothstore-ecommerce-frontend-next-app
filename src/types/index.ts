@@ -54,3 +54,12 @@ export interface ProductVariantProps {
   quantity: number;
   attribute_values: ValueProps[];
 }
+
+export type UserProps = {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone_number: string;
+  active: boolean;
+};

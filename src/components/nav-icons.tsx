@@ -12,8 +12,16 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import axios from "@/lib/axios";
+import { logoutUserAndRemoveSession } from "@/lib/auth-session";
+import { useToast } from "@/components/ui/use-toast";
 
-const NavIcons = ({}) => {
+type NavIconsProps = {
+  isAuthenticated: boolean | null;
+};
+
+const NavIcons = ({ isAuthenticated }: NavIconsProps) => {
+  const { toast } = useToast();
   // states
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -21,13 +29,40 @@ const NavIcons = ({}) => {
   // router
   const router = useRouter();
 
-  const isLoggedIn = false;
-
   const handleClickOutside = (event: MouseEvent) => {
     if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
       setIsProfileOpen(false);
     }
   };
+
+  /**
+   * ------ Handle logout --------
+   */
+  async function handleLogout() {
+    await axios.get("/sanctum/csrf-cookie");
+
+    try {
+      await axios.post("/logout");
+
+      // remove session and redirect to login page
+      await logoutUserAndRemoveSession();
+      router.push("/login");
+      // 5- display success toast message
+      toast({
+        title: "Logout Success",
+        description: "You are logged out successfully. GoodBye.",
+        className: "bg-green-700 text-white",
+      });
+    } catch (error) {
+      // 6- display toast message with error and display error
+      toast({
+        variant: "destructive",
+        title: "Uh oh, Logout Failed!!",
+        description: "Something went wrong while logging out.",
+        className: "bg-red-400 text-white",
+      });
+    }
+  }
 
   /**
    * -------------------
@@ -37,7 +72,7 @@ const NavIcons = ({}) => {
   return (
     <div className="flex gap-4 items-center lg:gap-6 relative">
       {/* Profile */}
-      {isLoggedIn ? (
+      {isAuthenticated ? (
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Image
@@ -53,7 +88,7 @@ const NavIcons = ({}) => {
             <DropdownMenuItem>
               <Link href={"/user-profile"}>Profile</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>
               <span>Logout</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
