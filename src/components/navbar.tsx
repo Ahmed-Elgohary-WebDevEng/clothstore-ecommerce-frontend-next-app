@@ -5,8 +5,10 @@ import Image from "next/image";
 import SearchBar from "@/components/search-bar";
 import NavIcons from "@/components/nav-icons";
 import { navbarLinksLargeScreens } from "@/constants/links";
+import { isAuthenticatedUser } from "@/lib/auth-session";
 
-const Navbar = ({}) => {
+const Navbar = async ({}) => {
+  const isAuth = await isAuthenticatedUser();
   /**
    * -------------------
    * ------- JSX -------
@@ -41,7 +43,7 @@ const Navbar = ({}) => {
         {/*  Right  */}
         <div className="w-2/3 xl:w-1/2 flex items-center justify-between gap-8">
           <SearchBar />
-          <NavIcons />
+          <NavIcons isAuthenticated={isAuth} />
         </div>
       </div>
     </div>
