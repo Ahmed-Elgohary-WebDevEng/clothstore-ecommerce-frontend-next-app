@@ -1,6 +1,6 @@
 # E-Commerce Clothing Store
 
-![Store Logo](public/logo.png)
+![Store Logo](public/website_img.png)
 
 Welcome to our E-Commerce Clothing Store, your go-to destination for the latest fashion trends and popular brands. This
 repository contains the source code for a fully-functional ecommerce web application designed to provide a seamless
