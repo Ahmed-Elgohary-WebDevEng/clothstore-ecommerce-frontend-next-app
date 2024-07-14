@@ -42,6 +42,7 @@ const LoginForm = ({}) => {
       await loginUserAndSetSession(user);
       // 4- redirect to home page
       router.push("/");
+
       // 5- display success toast message
       toast({
         title: "Login Success",

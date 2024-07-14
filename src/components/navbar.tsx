@@ -3,9 +3,12 @@ import Link from "next/link";
 import Menu from "@/components/menu";
 import Image from "next/image";
 import SearchBar from "@/components/search-bar";
-import NavIcons from "@/components/nav-icons";
+
 import { navbarLinksLargeScreens } from "@/constants/links";
 import { isAuthenticatedUser } from "@/lib/auth-session";
+import NavIcons from "@/components/nav-icons";
+
+// const NavIcons = dynamic(() => import("./nav-icons"), { ssr: false });
 
 const Navbar = async ({}) => {
   const isAuth = await isAuthenticatedUser();

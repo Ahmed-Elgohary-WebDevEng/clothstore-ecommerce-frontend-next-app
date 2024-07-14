@@ -20,7 +20,7 @@ function decrypt(input: string) {
 }
 
 /**
- * Login user and store session with user data
+ * Login user and redux session with user data
  * @param user
  */
 export async function loginUserAndSetSession(user: UserProps) {

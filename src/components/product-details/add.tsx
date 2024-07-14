@@ -3,9 +3,16 @@ import React, { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { addItemToCart } from "@/redux/features/cart/cartSlice";
 
-const Add = ({ productQty }: { productQty: number }) => {
+type AddProps = { productQty: number; productId: number };
+const Add = ({ productQty, productId }: AddProps) => {
   const [quantity, setQuantity] = useState(1);
+
+  // const { addItem } = useCartStore();
+  const dispatch = useAppDispatch();
+  const { status } = useAppSelector((state) => state.cart);
 
   function handleQuantity(type: "i" | "d") {
     if (type === "d" && quantity > 1) {
@@ -63,9 +70,16 @@ const Add = ({ productQty }: { productQty: number }) => {
           variant={"outline"}
           className={cn(
             "ring-notification ring-2 text-notification bg-white rounded-full hover:bg-notification hover:text-white px-6",
+            status === "loading" && "opacity-75",
           )}
+          disabled={status === "loading"}
+          onClick={() =>
+            dispatch(
+              addItemToCart({ product_id: productId, quantity: quantity }),
+            )
+          }
         >
-          Add to Cart
+          {status === "loading" ? "Loading ..." : "Add to Cart"}
         </Button>
       </div>
     </div>
