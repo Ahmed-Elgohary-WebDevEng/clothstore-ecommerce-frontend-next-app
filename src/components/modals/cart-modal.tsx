@@ -3,9 +3,11 @@ import CartItem from "@/components/cart-item";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import styles from "./cart-modal.module.css";
+import { useAppSelector } from "@/lib/hooks";
 
 const CartModal = ({}) => {
-  const cartItems = true;
+  // const { cartItems } = useCartStore();
+  const { cart } = useAppSelector((state) => state.cart);
   /**
    * -------------------
    * ------- JSX -------
@@ -13,7 +15,7 @@ const CartModal = ({}) => {
    */
   return (
     <div className="w-max absolute p-4 rounded-md shadow-md bg-white top-10 right-0 flex flex-col gap-6 z-20">
-      {!cartItems ? (
+      {!cart?.cart_items || cart?.cart_items.length === 0 ? (
         <div>Cart is Empty</div>
       ) : (
         <div className="flex flex-col gap-6">
@@ -21,13 +23,9 @@ const CartModal = ({}) => {
           <div
             className={`flex flex-col gap-6 max-h-72 overflow-y-scroll overflow-x-hidden ${styles.hideScrollbar}`}
           >
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
-            <CartItem />
+            {cart.cart_items.map((item) => (
+              <CartItem key={item.id} cartItem={item} />
+            ))}
           </div>
           {/* Total */}
           <div className="flex flex-col gap-3">

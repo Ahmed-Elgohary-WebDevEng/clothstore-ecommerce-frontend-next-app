@@ -29,7 +29,7 @@ const ProductDetails = ({
       <div className="h-[2px] bg-gray-100" />
       {/* Customization */}
       <CustomizeProduct attributes={productDetails.attributes || []} />
-      <Add productQty={productDetails.quantity} />
+      <Add productQty={productDetails.quantity} productId={productDetails.id} />
       <div className="h-[2px] bg-gray-100" />
       {/* Description of the product */}
       <div className="text-sm">

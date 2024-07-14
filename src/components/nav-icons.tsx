@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import CartModal from "@/components/modals/cart-modal";
@@ -15,6 +15,8 @@ import Link from "next/link";
 import axios from "@/lib/axios";
 import { logoutUserAndRemoveSession } from "@/lib/auth-session";
 import { useToast } from "@/components/ui/use-toast";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { fetchCartItems } from "@/redux/features/cart/cartSlice";
 
 type NavIconsProps = {
   isAuthenticated: boolean | null;
@@ -22,18 +24,26 @@ type NavIconsProps = {
 
 const NavIcons = ({ isAuthenticated }: NavIconsProps) => {
   const { toast } = useToast();
+
   // states
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const modalRef = useRef<HTMLDivElement | null>(null);
   // router
   const router = useRouter();
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-      setIsProfileOpen(false);
-    }
-  };
+  // states => zustand
+  // const { cart, getCart, cartItemsCount, cartItems } = useCartStore();
+
+  // useEffect(() => {
+  //   getCart();
+  // }, [getCart, cartItemsCount, isAuthenticated]);
+
+  // store redux
+  const dispatch = useAppDispatch();
+  const { cart, error, status } = useAppSelector((state) => state.cart);
+
+  useEffect(() => {
+    dispatch(fetchCartItems());
+  }, [dispatch]);
 
   /**
    * ------ Handle logout --------
@@ -47,6 +57,7 @@ const NavIcons = ({ isAuthenticated }: NavIconsProps) => {
       // remove session and redirect to login page
       await logoutUserAndRemoveSession();
       router.push("/login");
+      router.refresh();
       // 5- display success toast message
       toast({
         title: "Logout Success",
@@ -117,9 +128,10 @@ const NavIcons = ({ isAuthenticated }: NavIconsProps) => {
           onClick={() => setIsCartOpen((prevState) => !prevState)}
         />
         <span className="absolute -top-4 -right-4 w-6 h-6 bg-notification flex items-center justify-center text-sm font-bold rounded-full text-white">
-          2
+          {cart ? cart.cart_items_count : 0}
         </span>
       </div>
+
       {isCartOpen && <CartModal />}
     </div>
   );

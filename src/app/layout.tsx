@@ -5,6 +5,7 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import { cn } from "@/lib/utils";
 import { Toaster } from "@/components/ui/toaster";
+import GlobalStoreProvider from "@/redux/global-store-provider";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,10 +29,12 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        <Toaster />
-        <Navbar />
-        {children}
-        <Footer />
+        <GlobalStoreProvider>
+          <Toaster />
+          <Navbar />
+          {children}
+          <Footer />
+        </GlobalStoreProvider>
       </body>
     </html>
   );

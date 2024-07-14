@@ -1,4 +1,5 @@
 import {
+  CartProps,
   CategoryProps,
   ProductProps,
   ProductVariantProps,
@@ -41,3 +42,9 @@ export interface PaginationProps {
 export type ErrorResponse = {
   error: string;
 };
+
+export interface GetCartItemsResponse {
+  status: string;
+  message: null;
+  data: CartProps[];
+}

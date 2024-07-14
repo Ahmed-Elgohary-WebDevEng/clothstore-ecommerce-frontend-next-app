@@ -1,0 +1,15 @@
+"use client";
+
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "@/redux/features/counter/counterSlice";
+import cartReducer from "@/redux/features/cart/cartSlice";
+
+export const store = configureStore({
+  reducer: {
+    cart: cartReducer,
+    counter: counterReducer,
+  },
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

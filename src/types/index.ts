@@ -63,3 +63,16 @@ export type UserProps = {
   phone_number: string;
   active: boolean;
 };
+
+export interface CartProps {
+  id: number;
+  user_id: number;
+  cart_items_count: number;
+  cart_items: CartItemProps[];
+}
+
+export interface CartItemProps {
+  id: number;
+  quantity: number;
+  product: ProductProps;
+}
