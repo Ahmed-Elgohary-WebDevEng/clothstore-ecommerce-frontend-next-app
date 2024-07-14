@@ -1,10 +1,13 @@
 import React from "react";
 import Image from "next/image";
 import { CartItemProps } from "@/types";
-import { useCartStore } from "@/lib/zustand/cart-store";
+import { useAppDispatch } from "@/lib/hooks";
+import { removeItemFromCart } from "@/redux/features/cart/cartSlice";
 
 const CartItem = ({ cartItem }: { cartItem: CartItemProps }) => {
-  const { removeItem } = useCartStore();
+  // const { removeItem } = useCartStore();
+  const dispatch = useAppDispatch();
+
   /**
    * -------------------
    * ------- JSX -------
@@ -40,7 +43,7 @@ const CartItem = ({ cartItem }: { cartItem: CartItemProps }) => {
           </span>
           <span
             className="text-blue-500 cursor-pointer"
-            onClick={() => removeItem(cartItem.id)}
+            onClick={() => dispatch(removeItemFromCart(cartItem.id))}
           >
             Remove
           </span>

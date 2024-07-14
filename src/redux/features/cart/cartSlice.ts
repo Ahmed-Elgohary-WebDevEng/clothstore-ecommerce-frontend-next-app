@@ -44,6 +44,15 @@ export const addItemToCart = createAsyncThunk(
   },
 );
 
+export const removeItemFromCart = createAsyncThunk(
+  "cart/removeItemFromCart",
+  async (cartItemId: number, { dispatch }) => {
+    const response = await axios.delete(`/v1/api/cart/items/${cartItemId}`);
+    dispatch(fetchCartItems());
+    return response.data;
+  },
+);
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -75,6 +84,18 @@ export const cartSlice = createSlice({
         },
       )
       .addCase(addItemToCart.rejected, (state) => {
+        state.status = "failed";
+      })
+      .addCase(removeItemFromCart.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(
+        removeItemFromCart.fulfilled,
+        (state, action: PayloadAction<number>) => {
+          state.status = "succeeded";
+        },
+      )
+      .addCase(removeItemFromCart.rejected, (state) => {
         state.status = "failed";
       });
   },
